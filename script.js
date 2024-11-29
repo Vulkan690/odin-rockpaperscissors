@@ -9,14 +9,27 @@ function getHumanChoice() {
 
 // function gameRules() {
 //     const moves = ["rock", "paper", "scissors"];
-    
+
 // }
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    function playRound(humanChoice, computerChoice) {
-        const previousScore = [computerScore, humanScore];
+    let previousScore = [0, 0];
+    function showResultMessage(result) {
+        switch (result) {
+            case 0:
+                console.log("Draw");
+                break;
+            case 1:
+                console.log("Loss");
+                break;
+            case 2:
+                console.log("win");
+                break;
+        }
+    }
+    function playRound(computerChoice, humanChoice) {
         const humanMove = humanChoice.toLowerCase();
         let result = "";
         switch (humanMove) {
@@ -33,15 +46,18 @@ function playGame() {
                 computerChoice === "rock" ? computerScore++ : humanScore++;
                 break;
         }
-        const newScore = [computerScore, humanScore];
-        for (let i = 0; i < 2; i++) {
-            previousScore[i]
-        }
-        return [computerScore, humanScore];
+        return [computerScore, humanScore, computerChoice, humanChoice];
     }
     for (let i = 0; i < 5; i++) {
-        const message = playRound(getHumanChoice(), getComputerChoice());
-        console.log(message);
+        const roundResult = playRound(getHumanChoice(), getComputerChoice());
+        if (roundResult[0] > previousScore[0]) {
+            showResultMessage(1);
+        } else if (roundResult[1] > previousScore[1]) {
+            showResultMessage(2);
+        } else {
+            showResultMessage(0);
+        }
+        previousScore = [roundResult[0], roundResult[1]];
     }
 }
 playGame();

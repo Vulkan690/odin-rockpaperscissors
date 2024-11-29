@@ -7,32 +7,37 @@ function getHumanChoice() {
     return choice = prompt("Enter your move : rock, paper or scissors");
 }
 
-function gameRules() {
-    const moves = ["rock", "paper", "scissors"];
+// function gameRules() {
+//     const moves = ["rock", "paper", "scissors"];
     
-}
+// }
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
     function playRound(humanChoice, computerChoice) {
+        const previousScore = [computerScore, humanScore];
         const humanMove = humanChoice.toLowerCase();
         let result = "";
         switch (humanMove) {
             case computerChoice:
-                result = "Draw";
+                result = `${humanMove} against ${computerChoice}, it's a draw.`;
                 break;
             case "rock":
-                result = (computerChoice === "paper" ? "Paper beats Rock, you lose" : "Rock beats Scissors, you win");
+                computerChoice === "paper" ? computerScore++ : humanScore++;
                 break;
             case "paper":
-                result = (computerChoice === "scissors" ? "Scissors beat Paper, you lose" : "Paper beats Rock, you win");
+                computerChoice === "scissors" ? computerScore++ : humanScore++;
                 break;
             case "scissors":
-                result = (computerChoice === "rock" ? "Rock beats Scissors, you lose" : "Scissors beat Paper, you win");
+                computerChoice === "rock" ? computerScore++ : humanScore++;
                 break;
         }
-        return result;
+        const newScore = [computerScore, humanScore];
+        for (let i = 0; i < 2; i++) {
+            previousScore[i]
+        }
+        return [computerScore, humanScore];
     }
     for (let i = 0; i < 5; i++) {
         const message = playRound(getHumanChoice(), getComputerChoice());
